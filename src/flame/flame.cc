@@ -289,10 +289,11 @@ bool Flame::update(double time, uint32_t img_id,
     return false;
   }
 
-  if (params_.debug_draw_features) {
+  // if (params_.debug_draw_features) {
     drawFeatures(params_, fnew_->img[0], feats_in_curr_, &stats_,
                  &debug_img_features_);
-  }
+    cv::imshow("sss", debug_img_features_);
+  // }
 
   /*==================== Get current smoothed solution  ====================*/
   epigeo_.loadGeometry(T_prev_to_new.unit_quaternion(),

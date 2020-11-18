@@ -27,7 +27,7 @@ add_definitions("-std=c++11")
 include(cmake/setup.cmake)
 
 # Locate external dependencies
-find_package(OpenCV REQUIRED COMPONENTS core highgui imgproc imgcodecs)
+find_package(OpenCV 3 REQUIRED)
 find_package(Boost 1.54 REQUIRED COMPONENTS system filesystem graph)
 find_package(Sophus REQUIRED)
 
@@ -63,6 +63,9 @@ install(FILES
   ${PROJECT_BINARY_DIR}/lib/cmake/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake 
   ${PROJECT_BINARY_DIR}/lib/cmake/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake 
   DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/${PROJECT_NAME})
+
+add_executable(test_tum test/test_tum.cpp)
+target_link_libraries(test_tum ${PROJECT_NAME} ${OpenCV_LIBS} vs_common pthread)
 
 # If the BUILD_TESTS option is set, a Google test binary will be compiled.
 if (BUILD_TESTS)
